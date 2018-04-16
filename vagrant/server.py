@@ -12,8 +12,10 @@ session = DBSession()
 
 
 @app.route('/')
+def home():
+    return '<h2>Welcome Back !</h2>'
 @app.route('/restaurants/<int:restaurant_id>/')
-def home(restaurant_id):
+def restaurant_list(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).first()
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
     output = ''
