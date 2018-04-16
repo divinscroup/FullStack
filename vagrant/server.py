@@ -64,54 +64,6 @@ def deleteMenuItem(restaurant_id, menu_id):
         return redirect(url_for('restaurant_menu', restaurant_id=restaurant_id))
     else:
         return render_template('deletemenu.html', item=itemToDelete)
-"""
-description
-price
-course
-<dl>
-	<dt>Name:</dt>
-		<dd><input type ='text' size='30' name='name' placeholder = '{{item.name }}'></dd>
-	<dt>Description:</dt>
-		<dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea></dd>
-	<dt>Price:</dt>
-		<dd><input type = 'text' size = '8' name='price' placeholder = '{{item.price}}'></dd>
-	<dt>Course:</dt>
-
-	{% if item.course == 'Appetizier' %}
-		<dd><input type ='radio' name='course' value='Appetizer'checked >Appetizer</dd>
-	{%else%}
-	<dd><input type ='radio' name='course' value='Appetizer' >Appetizer</dd>
-    {% endif %}
-
-    {% if item.course == 'Entree' %}
-       <dd><input type ='radio' name='course' value='Entree' checked>Entree</dd>
-
-    {%else%}
-		<dd><input type ='radio' name='course' value='Entree'>Entree</dd>
-    {% endif %}
-
-	{% if item.course == 'Dessert'%}
-		<dd><input type ='radio' name='course' value='Dessert'checked >Dessert</dd>
-
-	{% else %}
-	   <dd><input type ='radio' name='course' value='Dessert'>Dessert</dd>
-
-	{% endif %}
-
-
-	{%if item.course =='Beverage'%}
-		<dd><input type ='radio' name='course' value='Beverage'checked >Beverage</dd>
-	{% else %}
-		<dd><input type ='radio' name='course' value='Beverage'>Beverage</dd>
-	{% endif %}
-
-
-
-
-
-</dl>
-
-"""
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
