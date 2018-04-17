@@ -1,13 +1,19 @@
 <html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
 <body>
+<div class = 'pane'>
+<h1> Edit Menu Item </h1>
+
 <form action= "{{url_for('edit_menu', restaurant_id = restaurant_id, menu_id=item.id)}}" method = 'POST'>
 <dl>
 	<dt>Name:</dt>
-		<dd><input type ='text' size='30' name='name' placeholder = '{{item.name}}'></dd>
+		<dd><input type ='text' size='30' name='name' placeholder = '{{item.name}}' value="{{item.name}}"></dd>
 	<dt>Description:</dt>
-		<dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea></dd>
+		<dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'>{{item.description }}</textarea></dd>
 	<dt>Price:</dt>
-		<dd><input type = 'text' size = '8' name='price' placeholder = '{{item.price}}'></dd>
+		<dd><input type = 'text' size = '8' name='price' placeholder = '{{item.price}}' value = '{{item.price}}'></dd>
 	<dt>Course:</dt>
 
 	{% if item.course == 'Appetizier' %}
@@ -47,7 +53,8 @@
 
 
 <input type='submit' value='Edit'>
-</form>
 <a href= "{{url_for('restaurant_menu', restaurant_id= item.restaurant_id)}}">Cancel</a>
+</form>
+</div>
 </body>
 </html>

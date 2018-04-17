@@ -13,7 +13,8 @@ session = DBSession()
 
 @app.route('/')
 def home():
-    return '<h2>Welcome Back !</h2>'
+    list = session.query(Restaurant).all()
+    return render_template('restlist.html', list=list)
 
 
 @app.route('/restaurants/<int:restaurant_id>/')
