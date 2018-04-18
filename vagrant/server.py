@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
@@ -10,6 +10,11 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+@app.route('/restaurants/<int:restaurant_id>/json')
+def restaurantJason(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
+    return jsonify(MenuItem=[i.serialize for i in items])
 
 @app.route('/')
 def home():
@@ -47,7 +52,7 @@ def edit_menu(restaurant_id, menu_id):
         editedItem.course = request.form['course']
         session.add(editedItem)
         session.commit()
-        flash("Menu Item has been edited")
+
         return redirect(url_for('restaurant_menu', restaurant_id=restaurant_id))
     else:
 
@@ -61,7 +66,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
-        flash("Menu Item has been deleted")
+
         return redirect(url_for('restaurant_menu', restaurant_id=restaurant_id))
     else:
         return render_template('deletemenu.html', item=itemToDelete)
